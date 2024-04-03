@@ -22,7 +22,7 @@ def parse_arguments():
 
     parser.add_argument('--mode', '-m',
                           help='single end (SE) or paired end (PE) reads?',
-                          default='SE')
+                          default='PE')
     
     parser.add_argument('--out_prefix', '-o',
                         help='Prefix of the corrected file.',
@@ -91,7 +91,9 @@ def main(args=None):
         for bam_line in bam_intersect:
             bam_str = str(bam_line)
             read_id = bam_str.split('\t')[3].split(':gc:')[0]
-            read_gc = float(bam_str.split('\t')[3].split(':gc:')[1])
+            #print(bam_str.split('\t')[3])
+#            read_gc = float(bam_str.split('\t')[3].split(':gc:')[1])
+            read_gc = float(eval(bam_str.split('\t')[3].split(':gc:')[1]))
             read_bed = bam_str.split(',\t')[-1]
             
             if read_bed in bed_depth_gc:
